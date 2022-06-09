@@ -196,27 +196,22 @@
 - [] import productRoutes as productRouter in the app.js
 - [] setup app.use('/api/v1/products', productRouter)
 
-#### Product Routes in Postman
+
 
 #### Create Product
 
-- [] create user property on req.body and set it equal to userId (req.user)
-- [] pass req.body into Product.create
-- [] send back the product
+- [X] create user 
+- [X] getAllProducts
+- [X] getSingleProduct
+- [X] updateProduct
+- [X] deleteProduct
+- [X] typical CRUD, utilize (task or job) project
 
-#### Remaining Controllers (apart from uploadImage)
-
-- [] getAllProducts
-- [] getSingleProduct
-- [] updateProduct
-- [] deleteProduct
-- [] typical CRUD, utilize (task or job) project
-- [] remember we check already for role 'admin'
 
 #### Upload Image
 
-- [] if some question, re-watch 07-file-upload
-- [] images folder with two images
+- [x] express-file-upload package
+- [x] make public file static if imgs not served from a Bucket
 
 #### Review Model
 
