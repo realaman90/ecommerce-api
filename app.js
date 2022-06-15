@@ -4,7 +4,12 @@ require('express-async-errors');
 const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
-const expressFileUpload = require('express-fileupload')
+const expressFileUpload = require('express-fileupload');
+const rateLimiter = require('express-rate-limit');
+const helmet = require('helmet');
+const xss = require('xss-clean');
+const cors = require('cors');
+const mongoSanatize = require('express-mongo-sanitize');
 
 
 
@@ -23,6 +28,15 @@ const orderRouter = require('./route/orderRoutes');
 //middleware
 const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
+
+app.set('trust-proxy', 1);
+app.use(rateLimiter({
+    windowMs: 15 * 60 * 1000,
+    max: 60
+}));
+app.use(helmet());
+app.use(cors());
+app.use(mongoSanatize());
 
 
 app.use(morgan('tiny'));

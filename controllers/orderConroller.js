@@ -3,18 +3,38 @@ const Product = require('../models/product');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../errors');
 const { checkPermissions } = require('../utils');
+const order = require('../models/order');
 
 
 
 const getAllOrders = async(req, res) => {
-    res.send('Get all orders')
+    const orders = await Order.find({});
+    res.status(StatusCodes.OK).json({ orders, count: orders.length });
 };
 const getSingleOrder = async(req, res) => {
-    res.send('Get single orders')
+    const { id: orderId } = req.params;
+
+    const order = await Order.findOne({ _id: orderId });
+    if (!order) {
+        throw new CustomError.NotFoundError(`Order Not Found with Id: ${orderId}`)
+    }
+
+    checkPermissions(req.user, order.user);
+    res.status(StatusCodes.OK).json({ order });
+
+
 };
 const getCurrentUserOrders = async(req, res) => {
-    res.send('Current User orders')
+
+    const orders = await Order.find({ user: req.user.userId });
+
+    res.status(StatusCodes.OK).json({ orders, count: orders.length });
 };
+
+const fakeStripeAPI = async({ amount, currency }) => {
+    const client_secret = "Random value";
+    return { client_secret, amount }
+}
 const createOrder = async(req, res) => {
     const { items: cartItems, tax, shippingFee } = req.body;
     if (!cartItems || cartItems.length < 1) {
@@ -49,16 +69,45 @@ const createOrder = async(req, res) => {
         //calculate subtotal
 
         subtotal += item.amount * price
-    }
-    console.log(orderItems);
-    console.log(subtotal)
+    };
+    //calculate total
+    const total = subtotal + tax + shippingFee;
 
-    res.send('Theek hai bhai')
+    // get client
+    const paymentIntent = await fakeStripeAPI({
+        amount: total,
+        currency: 'usd'
+    });
+    const order = await Order.create({
+        orderItems,
+        total,
+        subtotal,
+        tax,
+        shippingFee,
+        client_secret: paymentIntent.client_secret,
+        user: req.user.userId
+    });
+
+
+    res.status(StatusCodes.CREATED).json({ order, client_secret: order.client_secret })
 
 
 };
 const updateOrder = async(req, res) => {
-    res.send('update an order')
+    const { id: orderId } = req.params;
+    const { paymentIntent } = req.body
+
+    const order = await Order.findOne({ _id: orderId });
+    if (!order) {
+        throw new CustomError.NotFoundError(`Order Not Found with Id: ${orderId}`)
+    }
+
+    checkPermissions(req.user, order.user);
+    order.paymentIntent = paymentIntent;
+    order.status = 'paid';
+    await order.save();
+    res.status(StatusCodes.OK).json({ order });
+
 };
 
 module.exports = {

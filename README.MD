@@ -72,30 +72,30 @@
 
 #### JWT
 
-- [] require 'jsonwebtoken' package
-- [] create jwt - jwt.sign(payload,secret,options)
-- [] verify jwt - jwt.verify(token,secret)
-- [] add variables in .env JWT_SECRET=jwtSecret and JWT_LIFETIME=1d
-- [] restart the server !!!!
-- [] refactor code, create jwt functions in utils
-- [] refactor cookie code
-- [] setup func attachCookiesToResponse
-- [] accept payload(res, tokenUser)
-- [] create token, setup cookie
-- [] optionally send back the response
+- [x] require 'jsonwebtoken' package
+- [x] create jwt - jwt.sign(payload,secret,options)
+- [x] verify jwt - jwt.verify(token,secret)
+- [x] add variables in .env JWT_SECRET=jwtSecret and JWT_LIFETIME=1d
+- [x] restart the server !!!!
+- [x] refactor code, create jwt functions in utils
+- [x] refactor cookie code
+- [x] setup func attachCookiesToResponse
+- [x] accept payload(res, tokenUser)
+- [x] create token, setup cookie
+- [x] optionally send back the response
 
 #### Login Route
 
-- [] check if email and password exist, if one missing return 400
-- [] find user, if no user return 401
-- [] check password, if does not match return 401
-- [] if everything is correct, attach cookie
+- [x] check if email and password exist, if one missing return 400
+- [x] find user, if no user return 401
+- [x] check password, if does not match return 401
+- [x] if everything is correct, attach cookie
   and send back the same response as in register
 
 #### Logout Route
 
-- [] set token cookie equal to some string value
-- [] set expires:new Date(Date.now())
+- [x] set token cookie equal to some string value
+- [x] set expires:new Date(Date.now())
 
 #### User Routes Structure
 
@@ -133,30 +133,30 @@
 
 #### UpdateUserPassword
 
-- [X] almost identical to login user
-- [] add authenticateUser middleware in the route
-- [] check for oldPassword and newPassword in the body
-- [] if one missing 400
-- [] look for user with req.user.userId
-- [] check if oldPassword matches with user.comparePassword
-- [] if no match 401
-- [] if everything good set user.password equal to newPassword
-- [] await user.save()
+- [x] almost identical to login user
+- [x] add authenticateUser middleware in the route
+- [x] check for oldPassword and newPassword in the body
+- [x] if one missing 400
+- [x] look for user with req.user.userId
+- [x] check if oldPassword matches with user.comparePassword
+- [x] if no match 401
+- [x] if everything good set user.password equal to newPassword
+- [x] await user.save()
 
 #### createTokenUser in Utils
 
-- [] create a file in utils (createTokenUser)
-- [] setup a function that accepts user object and returns userToken object
-- [] export as default
-- [] setup all the correct imports/exports and refactor existing code
+- [x] create a file in utils (createTokenUser)
+- [x] setup a function that accepts user object and returns userToken object
+- [x] export as default
+- [x] setup all the correct imports/exports and refactor existing code
 
 #### updateUser with User.findOneAndUpdate()
 
-- [] add authenticateUser middleware in the route
-- [] check for name and email in the body
-- [] if one is missing, send 400 (optional)
-- [] use findOneAndUpdate()
-- [] create token user, attachCookiesToResponse and send back the tokenUser
+- [x] add authenticateUser middleware in the route
+- [x] check for name and email in the body
+- [x] if one is missing, send 400 (optional)
+- [x] use findOneAndUpdate()
+- [x] create token user, attachCookiesToResponse and send back the tokenUser
 
 #### updateUser with user.save()
 
@@ -164,37 +164,37 @@
 
 #### Product Model
 
-- [] create Product.js in models folder
-- [] create Schema
-- [] name : {type:String}
-- [] price: {type:Number}
-- [] description: {type:String}
-- [] image: {type:String}
-- [] category: {type:String}
-- [] company: {type:String}
-- [] colors: {type:[]}
-- [] featured: {type:Boolean}
-- [] freeShipping: {type:Boolean}
-- [] inventory:{type:Number}
-- [] averageRating:{type:Number}
-- [] user
-- [] set timestamps
-- [] export Product model
+- [x] create Product.js in models folder
+- [x] create Schema
+- [x] name : {type:String}
+- [x] price: {type:Number}
+- [x] description: {type:String}
+- [x] image: {type:String}
+- [x] category: {type:String}
+- [x] company: {type:String}
+- [x] colors: {type:[]}
+- [x] featured: {type:Boolean}
+- [x] freeShipping: {type:Boolean}
+- [x] inventory:{type:Number}
+- [x] averageRating:{type:Number}
+- [x] user
+- [x] set timestamps
+- [x] export Product model
 
 #### Product Structure
 
-- [] add productController file in controllers
-- [] export (createProduct, getAllProducts,
+- [x] add productController file in controllers
+- [x] export (createProduct, getAllProducts,
   getSingleProduct, updateProduct, deleteProduct, uploadImage) functions
-- [] res.send('function name')
-- [] setup productRoutes file in routes
-- [] import all controllers
-- [] only getAllProducts and getSingleProduct accessible to public
-- [] rest only by admin (setup middlewares)
-- [] typical setup
-- [] router.route('/uploadImage').post(uploadImage)
-- [] import productRoutes as productRouter in the app.js
-- [] setup app.use('/api/v1/products', productRouter)
+- [x] res.send('function name')
+- [x] setup productRoutes file in routes
+- [x] import all controllers
+- [x] only getAllProducts and getSingleProduct accessible to public
+- [x] rest only by admin (setup middlewares)
+- [x] typical setup
+- [x] router.route('/uploadImage').post(uploadImage)
+- [x] import productRoutes as productRouter in the app.js
+- [x] setup app.use('/api/v1/products', productRouter)
 
 
 
@@ -215,59 +215,59 @@
 
 #### Review Model
 
-- [] create Review.js in models folder
-- [] create Schema
-- [] rating : {type:Number}
-- [] title: {type:String}
-- [] comment: {type:String}
-- [] user
-- [] product
-- [] set timestamps
-- [] export Review model
+- [x] create Review.js in models folder
+- [x] create Schema
+- [x] rating : {type:Number}
+- [x] title: {type:String}
+- [x] comment: {type:String}
+- [x] user
+- [x] product
+- [x] set timestamps
+- [x] export Review model
 
 #### Review Structure
 
-- [] add reviewController file in controllers
-- [] export (createReview, getAllReviews, getSingleReview, updateReview, deleteReview) functions
-- [] res.send('function name')
-- [] setup reviewRoutes file in routes
-- [] import all controllers
-- [] only getAllReviews and getSingleReview accessible to public
-- [] rest only to users (setup middleware)
-- [] typical REST setup
-- [] import reviewRoutes as reviewRouter in the app.js
-- [] setup app.use('/api/v1/reviews', reviewRouter)
+- [x] add reviewController file in controllers
+- [x] export (createReview, getAllReviews, getSingleReview, updateReview, deleteReview) functions
+- [x] res.send('function name')
+- [x] setup reviewRoutes file in routes
+- [x] import all controllers
+- [x] only getAllReviews and getSingleReview accessible to public
+- [x] rest only to users (setup middleware)
+- [x] typical REST setup
+- [x] import reviewRoutes as reviewRouter in the app.js
+- [x] setup app.use('/api/v1/reviews', reviewRouter)
 
 #### Create Review
 
-- [] check for product in the req.body
-- [] attach user property (set it equal to req.user.userId) on to req.body
-- [] create review
-- [] don't test yet
+- [x] check for product in the req.body
+- [x] attach user property (set it equal to req.user.userId) on to req.body
+- [x] create review
+
 
 #### Get All Reviews and Get Single Review
 
-- [] both public routes, typical setup
+- [x] both public routes, typical setup
 
 #### Delete Review
 
-- [] get id from req.params
-- [] check if review exists
-- [] if no review, 404
-- [] check permissions (req.user, review.user)
-- [] use await review.remove()
-- [] send back 200
+- [x] get id from req.params
+- [x] check if review exists
+- [x] if no review, 404
+- [x] check permissions (req.user, review.user)
+- [x] use await review.remove()
+- [x] send back 200
 
 #### Update Review
 
-- [] get id from req.params
-- [] get {rating, title comment} from req.body
-- [] check if review exists
-- [] if no review, 404
-- [] check permissions
-- [] set review properties equal to rating, title, comment
-- [] use await review.save()
-- [] send back 200
+- [x] get id from req.params
+- [x] get {rating, title comment} from req.body
+- [x] check if review exists
+- [x] if no review, 404
+- [x] check permissions
+- [x] set review properties equal to rating, title, comment
+- [x] use await review.save()
+- [x] send back 200
 
 #### Populate
 
@@ -277,95 +277,75 @@
 
 #### Remove All Reviews
 
-#### Aggregation Pipeline - Atlas and Code
+#### Aggregation Pipeline - Atlas visual UI for match and group and Code
 
 #### Order Schema
 
-- [] create Order.js in models folder
-- [] create Schema
-- [] tax : {type:Number}
-- [] shippingFee: {type:Number}
-- [] subtotal: {type:Number}
-- [] total: {type:Number}
-- [] orderItems:[]
-- [] status:{type:String}
-- [] user
-- [] clientSecret:{type:String}
-- [] paymentId:{type:String}
-- [] set timestamps
-- [] export Order model
+- [x] create Order.js in models folder
+- [x] create Schema
+- [x] tax : {type:Number}
+- [x] shippingFee: {type:Number}
+- [x] subtotal: {type:Number}
+- [x] total: {type:Number}
+- [x] orderItems:[]
+- [x] status:{type:String}
+- [x] user
+- [x] clientSecret:{type:String}
+- [x] paymentId:{type:String}
+- [x] set timestamps
+- [x] export Order model
 
 #### Order Structure
 
-- [] add orderController file in controllers
-- [] export (getAllOrders, getSingleOrder, getCurrentUserOrders,
+- [x] add orderController file in controllers
+- [x] export (getAllOrders, getSingleOrder, getCurrentUserOrders,
   createOrder, updateOrder) functions
-- [] res.send('function name')
-- [] setup orderRoutes file in routes
-- [] import all controllers
-- [] authenticate user in all routes
-- [] getAllOrders admin only
-- [] typical REST setup
-- [] router.route('/showAllMyOrders').get(getCurrentUserOrders)
-- [] import orderRoutes as orderRouter in the app.js
-- [] setup app.use('/api/v1/orders', orderRouter)
+- [x] res.send('function name')
+- [x] setup orderRoutes file in routes
+- [x] import all controllers
+- [x] authenticate user in all routes
+- [x] getAllOrders admin only
+- [x] typical REST setup
+- [x] router.route('/showAllMyOrders').get(getCurrentUserOrders)
+- [x] import orderRoutes as orderRouter in the app.js
+- [x] setup app.use('/api/v1/orders', orderRouter)
 
 #### Order in Postman
 
 #### Create Order
 
-- [] most complex
 
 #### Get All Orders and Get Single Order
 
-- [] getAllOrders - admin only
-- [] getSingleOrder - chechPermissions
+- [x] getAllOrders - admin only
+- [x] getSingleOrder - checkPermissions
 
 #### Get Current User Orders
 
-- [] find orders where user is equal to req.user.userId
+- [x] find orders where user is equal to req.user.userId
 
 #### Update Order
 
-- [] get order id
-- [] get paymentIntentId (req.body)
-- [] get order
-- [] if does not exist - 404
-- [] check permissions
-- [] set paymentIntentId and status as 'paid'
-- [] order.save()
+- [x] get order id
+- [x] get paymentIntentId (req.body)
+- [x] get order
+- [x] if does not exist - 404
+- [x] check permissions
+- [x] set paymentIntentId and status as 'paid'
+- [x] order.save()
 
 #### Create Docs
 
-- [] [Docgen Library] (https://github.com/thedevsaddam/docgen)
-- [] Export Postman Collection
-- [] docgen build -i fileName.json -o index.html
-- [] create index.html in public
+- [x] [Docgen Library] (https://github.com/thedevsaddam/docgen)
+- [x] Export Postman Collection
+- [x] docgen build -i fileName.json -o index.html
+- [x] create index.html in public
 
 #### Security Packages
 
-- [] express-rate-limiter
-- [] helmet
-- [] xss-clean
-- [] express-mongo-sanitize
-- [] cors (cookies!!!!)
+- [x] express-rate-limiter
+- [x] helmet
+- [x] xss-clean
+- [x] express-mongo-sanitize
+- [x] cors (cookies!!!!)
 
-#### Deploy on Heroku
-
-- [] heroku account and heroku cli
-- [] remove/copy from the main repo
-- [] add dev command "nodemon app.js"
-- [] change start to "node app.js"
-- [] setup node version in package.json
-- [] "engines": {"node": "14.x"}
-- [] Procfile "web: node app.js"
-- [] remove existing git repo
-- [] rm -rf .git - mac,
-- [] git init
-- [] git add .
-- [] git commit -m "initial commit"
-- [] heroku login
-- [] heroku create "App Name"
-- [] git remote -v
-- [] setup env vars in GUI
-- [] git push heroku master/main

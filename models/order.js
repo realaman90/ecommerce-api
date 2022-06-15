@@ -40,11 +40,11 @@ const OrderSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
-    clientSecret: {
+    client_secret: {
         type: String,
         required: true,
     },
-    paymentIntentId: {
+    paymentIntent: {
         type: String
     },
 }, { timestamps: true });
