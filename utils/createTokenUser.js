@@ -1,5 +1,13 @@
+const { createJWT }  = require('./jwt');
+
 const createUserToken = (user) => {
-    return { name: user.name, userId: user._id, role: user.role };
+
+    const token = createJWT({
+        payload: user
+    })
+
+    return token;
+
 };
 
 module.exports = createUserToken

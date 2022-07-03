@@ -18,8 +18,6 @@ const attachedCookiesToResponse = ({ res, user }) => {
         signed: true
 
     });
-
-
 }
 
 module.exports = {

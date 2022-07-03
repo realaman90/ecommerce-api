@@ -1,6 +1,6 @@
 const express = require('express');
 const { route } = require('express/lib/router');
-const { authenticateUser, authorizePermissions } = require('../middleware/authentication');
+const { authenticateUser, authorizeRoles } = require('../middleware/full-auth');
 
 
 const router = express.Router()
@@ -13,7 +13,7 @@ const {
     updateUserPassword
 } = require('../controllers/userController');
 
-router.route('/').get(authenticateUser, authorizePermissions('admin', 'owner'), getAllUser);
+router.route('/').get(authenticateUser, authorizeRoles('admin', 'owner'), getAllUser);
 
 router.route('/showMe').get(authenticateUser, showCurrentUser);
 router.route('/updateUser').patch(authenticateUser, updateUser);

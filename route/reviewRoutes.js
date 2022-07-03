@@ -1,9 +1,8 @@
 const express = require('express');
 const { route } = require('express/lib/application');
 const {
-    authenticateUser,
-
-} = require('../middleware/authentication');
+    authenticateUser,    
+} = require('../middleware/full-auth');
 
 const router = express.Router();
 

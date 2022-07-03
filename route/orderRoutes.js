@@ -1,9 +1,6 @@
 const express = require('express');
 const { route } = require('express/lib/application');
-const {
-    authenticateUser,
-    authorizePermissions
-} = require('../middleware/authentication');
+const { authenticateUser, authorizeRoles } = require('../middleware/full-auth');
 
 
 const router = express.Router();
@@ -20,7 +17,7 @@ const {
 router
     .route('/')
     .post(authenticateUser, createOrder)
-    .get([authenticateUser, authorizePermissions('admin', 'owner')], getAllOrders);
+    .get([authenticateUser, authorizeRoles('admin', 'owner')], getAllOrders);
 
 router
     .route('/showAllMyOrders')
